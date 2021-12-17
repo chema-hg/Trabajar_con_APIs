@@ -17,16 +17,27 @@ print(f"Status code: {r.status_code}")
 # Procesa los resultados basándose en los repositorios y a las estrellas.
 response_dict = r.json()
 repo_dicts = response_dict['items']
-nombre_repositorios, estrellas = [], []
+repo_links, estrellas, etiquetas = [], [], []
 for repo_dict in repo_dicts:
-    nombre_repositorios.append(repo_dict['name'])
+    repo_name = repo_dict['name']
+    repo_url = repo_dict['html_url']
+    repo_link = f"<a href='{repo_url}'>{repo_name}</a>"
+    repo_links.append(repo_link) # Añadir enlaces activos al gráfico.
     estrellas.append(repo_dict['stargazers_count'])
+
+    # Propietario y descripción de cada proyecto.
+    owner = repo_dict['owner']['login']
+    description = repo_dict['description']
+    label = f"{owner}<br />{description}"
+    etiquetas.append(label)
+
 
 # Hace la visualización
 datos = [{
     'type': 'bar',
-    'x': nombre_repositorios,
+    'x': repo_links,
     'y': estrellas,
+    'hovertext': etiquetas, # Texto q se muestra al pasar el ratón por cada barra.
     'marker': {
         'color': 'rgb(60, 100, 150)',
         'line': {'width': 1.5, 'color': 'rgb(25,25,25)'}
