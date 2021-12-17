@@ -47,7 +47,7 @@ for key in sorted(repo_dict.keys()):
 # Vamos a sacar las principales caracteristicas los repositorios
 for repo_dict in repo_dicts:
     print('\n')
-    print(f"Información principal del repositorio.".center(75,'-'))
+    print(f"Información principal del repositorio.".center(75, '-'))
     print(f'''Nombre: {repo_dict['name']}
 Propietario: {repo_dict['owner']['login']}
 Estrellas: {repo_dict['stargazers_count']}
@@ -56,4 +56,3 @@ Creado: {repo_dict['created_at']}
 Actualizado: {repo_dict['updated_at']}
 Descripción: {repo_dict['description']}
 ''')
-
